@@ -9,7 +9,14 @@
 </head>
 <body>
   <div class="container">
-  <div id="app" class="container text-center">Tic Tac Toe - 'x' goes first!</div>
+  <div id="app" class="container text-center h2">Tic Tac Toe</div>
+  <div class="h6 text-center">Note: Loser goes first</div>
+  <br>
+  <div class="row">
+    <div id='xwins' class="col text-center h3">X's Wins: 0</div>
+    <div id='owins' class="col text-center h3">O's Wins: 0</div>
+  </div>
+  <br>
     <div id="row1" class="row">
       <div id="cell1" class="cell col border-bottom border-right border-dark text-center" style="height: 150px"></div>
       <div id="cell2" class="cell col border-bottom border-right border-dark text-center" style="height: 150px"></div>
@@ -27,8 +34,9 @@
     </div>
     </div>
   </div>
-  <div class="row">
-    <button id="reset" type="button" class="col text-center" style="visibility: hidden">Reset?</button>
+  <br>
+  <div class="row justify-content-center">
+    <button id="reset" type="button" class="col-3 text-center btn btn-primary" style="visibility: hidden">Reset?</button>
   </div>
 </body>
 <script src="app.js"></script>
