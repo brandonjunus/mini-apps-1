@@ -8,7 +8,8 @@ var gameMatrix = [
   [[7, 0],[8, 0], [9, 0]]
 ]
 
-var currentPlayer = "x"
+var currentPlayer = "x";
+var isGameComplete = false;
 
 // create event listener function for each div
 var cells = document.getElementsByClassName("cell");
@@ -18,27 +19,27 @@ for (let i = 0; i < cells.length; i++){
   (function(index) {
     var currentcell = cells[index].id
     cells[index].addEventListener("click", () => {
-      // The game starts when someone makes a move. 
-      // this function hides the reset button when you start the game
-      hideResetButton();
-
-      // check board to see if that move is available. If not, do nothing 
-      currentMatrixPosition = parseInt(currentcell.slice(4)); // should be a single digit number
-      
-      if (isMovePlayable(currentMatrixPosition)){
-        // move is playable
-
-        // changes the innerHTML of that cell to the right player
-        document.getElementById(currentcell).innerHTML = currentPlayer;
-        // changes the gameMatrix to reflect that the move has changed
-        playMove(currentMatrixPosition)
-        // see if anyone one because of that move
-        isGameComplete()
-        
-
+      if(isGameComplete) {
+        alert("Click RESET to play again!")
       } else {
-        // move is not playable
-        alert("move is not playable! Try again")
+        // The game starts when someone makes a move. 
+        // this function hides the reset button when you start the game
+        hideResetButton();
+  
+        // check board to see if that move is available. If not, do nothing 
+        currentMatrixPosition = parseInt(currentcell.slice(4)); // should be a single digit number
+        
+        if (isMovePlayable(currentMatrixPosition)){
+          // changes the innerHTML of that cell to the right player
+          document.getElementById(currentcell).innerHTML = currentPlayer;
+          // changes the gameMatrix to reflect that the move has changed
+          playMove(currentMatrixPosition)
+          // see if anyone one because of that move
+          isGameWon();
+          isGameTied();
+        } else {
+          alert("move is not playable! Try again")
+        }
       }
     })
   })(i)
@@ -55,6 +56,7 @@ document.getElementById('reset').addEventListener('click', () => {
   for (let j = 0; j < cells.length; j++){
     cells[j].innerHTML = "";
   }
+  isGameComplete = false;
 })
 
 
@@ -86,7 +88,13 @@ playMove = (currentMatrixPosition) => {
   }
 }
 
-isGameComplete = () => {
+completeGameWithWin = (player) => {
+  alert(player + " has won the game!");
+  isGameComplete = true;
+  renderResetButton();
+}
+
+isGameWon = () => {
   var players = ['x', 'o'];
 
   // check rows for winner
@@ -97,8 +105,7 @@ isGameComplete = () => {
         gameMatrix[j][1][1] === players[playerIteration] &&
         gameMatrix[j][2][1] === players[playerIteration]
       ) {
-        alert(players[playerIteration] + "has won the game!")
-        renderResetButton();
+        completeGameWithWin(players[playerIteration])
         return;
       } 
     }
@@ -112,8 +119,7 @@ isGameComplete = () => {
         gameMatrix[1][j][1] === players[playerIteration] &&
         gameMatrix[2][j][1] === players[playerIteration]
       ) {
-        alert(players[playerIteration] + " has won the game!")
-        renderResetButton();
+        completeGameWithWin(players[playerIteration])
         return;
       } 
     }
@@ -126,8 +132,7 @@ isGameComplete = () => {
         gameMatrix[1][1][1] === players[playerIteration] &&
         gameMatrix[2][2][1] === players[playerIteration]
       ) {
-        alert(players[playerIteration] + " has won the game!")
-        renderResetButton();
+        completeGameWithWin(players[playerIteration])
         return;
     }
   }
@@ -139,15 +144,25 @@ isGameComplete = () => {
         gameMatrix[1][1][1] === players[playerIteration] &&
         gameMatrix[2][0][1] === players[playerIteration]
       ) {
-        alert(players[playerIteration] + " has won the game!")
-        renderResetButton();
+        completeGameWithWin(players[playerIteration])
         return;
     }
   }
+}
 
-
-
-  
+isGameTied = () => {
+  for(let j = 0; j < gameMatrix.length; j++){
+    for(let k = 0; k < gameMatrix[j].length; k++){
+      if (gameMatrix[j][k][1] === 0){
+        return;
+      }
+    }
+  }
+  if (!isGameComplete){
+    alert("game is tied!")
+    isGameComplete = true;
+  }
+  renderResetButton();
 }
 
 renderResetButton = () => {
