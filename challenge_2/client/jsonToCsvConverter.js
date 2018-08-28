@@ -31,6 +31,7 @@ JSONtoCSV = (JSONfile) => {
   
   var csvFile = ""
   for (let i = 0; i < rows.length; i++){
+    rows[i].unshift(i);
     csvFile += rows[i].join(",");
     csvFile += `\n`
     csvFile.substring(0, csvFile.length - 1);
