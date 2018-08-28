@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dist": "webpack",
+    "dist": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Muthu",
+  "author": "JUNUS",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.25.0",
