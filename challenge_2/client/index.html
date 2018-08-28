@@ -12,12 +12,22 @@
   crossorigin="anonymous"></script>
 </head>
 <body>
-  <h1>CSV FILE GENERATOR LOL</h1>
-  <textarea id="inputarea" rows="15" cols="100"></textarea>
-  <br>
-  <button id="senddata" class="btn btn-primary">Turn that JSON to a CSV</button>
-  <h1>Here's your data</h1>
-  <div id="csvdata" class="container border border-dark"></div>
+  <h1 class="text-center">JSON -> CSV</h1>
+  <h6 class="text-center">Immediately convert your JSON into CSV</h6>
+  <div class="container">
+    <div class="row">
+      <div class="container-fluid col-8">
+        <h6>Enter JSON data</h6>
+        <textarea id="inputarea" class="form-control border border-dark" rows="15"></textarea>
+        <br>
+        <button id="senddata" class="btn btn-primary">Turn that JSON to a CSV</button>
+      </div>
+      <div class="contain-fluid col">
+        <h6>CSV Text Data</h6>
+        <div id="csvdata" class="container border border-dark h-100 rounded"></div>
+      </div>
+    </div>
+  </div>
   <script src="/client/app.js"></script>
 </body>
 </html>

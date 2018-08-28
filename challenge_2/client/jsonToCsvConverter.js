@@ -1,8 +1,5 @@
 JSONtoCSV = (JSONfile) => {
   
-  console.log("Hello");
-  console.log('original json file',  JSONfile);
-  
   // make columns
   var rows = []; 
   var currentRow = [];
@@ -15,6 +12,7 @@ JSONtoCSV = (JSONfile) => {
   
   // // RECURSIVE HELPER FUNCTION TO GET THE DATA
   childrenToCSV = (JSONfile) => {
+    console.log('json children', JSONfile.children)
     currentRow = [];
     for(key in JSONfile){
       if (key !== 'children'){
@@ -22,7 +20,7 @@ JSONtoCSV = (JSONfile) => {
       }
     }
     rows.push(currentRow);
-    if ( JSONfile.children.length > 0){
+    if (JSONfile.children.length > 0){
       for (let i = 0; i < JSONfile.children.length; i++){
         childrenToCSV(JSONfile.children[i])
       }
@@ -40,21 +38,6 @@ JSONtoCSV = (JSONfile) => {
   return csvFile;
 }
 
-
-
 module.exports = {
   JSONtoCSV: JSONtoCSV,
-  // finalCsv: finalCsv
 }
-// filename = `export.csv`;
-
-// document.getElementById('csvdata').innerHTML = `<p>${data}</p>`
-// link.setAttribute('href', data);
-// link.setAttribute('download', filename);
-// link.click();
-
-// document.getElementById("senddata").addEventListener('click', () => {
-//   console.log("you clicked me lol");
-
-
-// })
