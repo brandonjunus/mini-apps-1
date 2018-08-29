@@ -2,19 +2,6 @@ $("#senddata").click(() => {
   var jsonInput = document.getElementById('inputarea').value;
   var filter = document.getElementById('filter').value;
 
-  var textFile = document.getElementById('fileinput').files[0];
-  console.log(textFile);
-
-  read = () => {
-    var file = textFile;
-    var reader = new FileReader();
-    reader.onload = () => {
-      console.log("readerfile", reader.result);
-    }
-    reader.readAsText(file);
-  }
-
-  read();
   $.ajax(
     {
       url: "http://127.0.0.1:3000/",
@@ -27,23 +14,20 @@ $("#senddata").click(() => {
         document.getElementById('csvdata').innerHTML = `<p>${result}</p>`
         
         // THIS CODE MAKES YOU DOWNLOAD IT IMMEDIATELY
-        // csv = 'data:text/csv;charset=utf-8,' + result;
-        // data = encodeURI(csv);
-        // link = document.createElement('a');
-        // link.setAttribute('href', data);
-        // link.setAttribute('download', 'export.csv');
-        // link.click();
+        csv = 'data:text/csv;charset=utf-8,' + result;
+        data = encodeURI(csv);
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', 'export.csv');
+        link.click();
       }
     }
   );
 });
 
 $("#uploadfile").click(() => {
-  var jsonInput = document.getElementById('inputarea').value;
-  var filter = document.getElementById('filter').value;
-
   var textFile = document.getElementById('fileinput').files[0];
-  console.log(textFile);
+  var filter = document.getElementById('filter').value;
 
   read = (callback) => {
     var file = textFile;
