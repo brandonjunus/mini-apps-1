@@ -14,7 +14,7 @@ app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/client/index.html
 app.post('/', (req, res) => {
   if (!req.body) return res.sendStatus(400);
   var prasedBody = JSON.parse(req.body.input); 
-  var CSVdata = jsonToCSVConverter.JSONtoCSV(prasedBody);
+  var CSVdata = jsonToCSVConverter.JSONtoCSV(prasedBody, req.body.filter);
   res.set('text/csv')
   .status(201)
   .send(CSVdata);

@@ -17,14 +17,28 @@
   <div class="container">
     <div class="row">
       <div class="container-fluid col-8">
+        <div class="row container">
+        </div>
         <h6>Enter JSON data</h6>
-        <textarea id="inputarea" class="form-control border border-dark" rows="15"></textarea>
+        <textarea id="inputarea" class="form-control border border-dark" rows="15">Enter JSON Data</textarea>
         <br>
-        <button id="senddata" class="btn btn-primary">Turn that JSON to a CSV</button>
+        <input id="filter" class="form-control form-control-sm" type="text" placeholder="Filter out records containing your input here"></input>
+        <br>
+        <div class="row container">
+          <button id="senddata" class="col btn btn-primary">Turn that JSON to a CSV</button>
+          <!-- <form> -->
+            <div class="form-group col">
+              <label for="exampleFormControlFile1">Or select a Text file with JSON to convert</label>
+              <input type="file" class="form-control-file" id="fileinput">
+              <br>
+              <button id="uploadfile" class="col btn btn-primary">Upload File</button>
+            </div>
+          <!-- </form> -->
+        </div>
       </div>
       <div class="contain-fluid col">
         <h6>CSV Text Data</h6>
-        <div id="csvdata" class="container border border-dark h-100 rounded"></div>
+        <div id="csvdata" class="container border border-dark h-100 rounded">Waiting for JSON Data to convert...</div>
       </div>
     </div>
   </div>

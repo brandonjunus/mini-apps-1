@@ -1,5 +1,5 @@
-JSONtoCSV = (JSONfile) => {
-  
+JSONtoCSV = (JSONfile, filter) => {
+
   // make columns
   var rows = []; 
   var currentRow = [];
@@ -28,13 +28,17 @@ JSONtoCSV = (JSONfile) => {
   }
   
   childrenToCSV(JSONfile);
-  
+  var uniqueIDCounter = 0;
   var csvFile = ""
   for (let i = 0; i < rows.length; i++){
-    rows[i].unshift(i);
+    if (rows[i].includes(filter)) {
+      continue;
+    }
+    rows[i].unshift(uniqueIDCounter);
     csvFile += rows[i].join(",");
     csvFile += `\n`
-    csvFile.substring(0, csvFile.length - 1);
+    // csvFile.substring(0, csvFile.length - 1);
+    uniqueIDCounter++;
   }
   return csvFile;
 }
